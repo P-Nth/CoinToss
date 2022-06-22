@@ -57,12 +57,12 @@ function guess() {
   document.getElementById("compChoice").innerHTML = comp;
   // Correct Answer
   theAnswer();
-  let ans = theAnswer(2, 4);
+  let ans = theAnswer(3, 5);
   switch (ans) {
-    case 2:
+    case 3:
       answer = "Head";
       break;
-    case 4:
+    case 5:
       answer = "Tail";
       break;
   }

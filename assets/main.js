@@ -6,7 +6,7 @@ document.getElementById("tail").addEventListener("click", (e) => {
   document.getElementById("userChoice").innerHTML =
     document.getElementById("tail").innerHTML;
 });
-
+let useranswer = document.getElementById("userChoice").innerHTML;
 function compChoice(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -18,27 +18,48 @@ function theAnswer(head, tail) {
 function findWinner() {
   let userCount = 0;
   let compCount = 0;
-  if (useranswer !== answer) {
-    if (useranswer < compChoice) {
-      compCount += 1;
-    } else if (useranswer > compChoice) {
-      userCount += 1;
-    }
-  } else {
-    userCount += 0;
-    compCount += 0;
+  if (useranswer === correctAnswer) {
+    userCount++;
   }
-
+  if (compAnswer === correctAnswer) {
+    compCount++;
+  }
+  if (useranswer === compAnswer) {
+    if (useranswer !== correctAnswer) {
+      userCount = 0;
+      compCount = 0;
+    }
+  }
   if (userCount > compCount) {
     document.getElementById("winner").innerHTML = "You Win!";
-  } else if (userCount < compCount) {
+  }
+  if (userCount < compCount) {
     document.getElementById("winner").innerHTML = "You Loose!";
-  } else {
+  }
+  if (userCount === compCount) {
     document.getElementById("winner").innerHTML = "Its A Tie!";
   }
-  console.log(userCount, compCount);
   return userCount, compCount;
 }
+
+// function calcCount(useranswer, compAnswer, correctAnswer) {
+//   let userCount = 0;
+//   let compCount = 0;
+//   if (useranswer === correctAnswer) {
+//     userCount++;
+//   }
+//   if (compAnswer === correctAnswer) {
+//     compCount++;
+//   }
+//   if (useranswer === compAnswer) {
+//     if (useranswer !== correctAnswer) {
+//       userCount = 0;
+//       compCount = 0;
+//     }
+//   }
+//   //   console.log(userCount, compCount);
+//   return userCount, compCount;
+// }
 
 function guess() {
   // user choice
@@ -48,31 +69,35 @@ function guess() {
   let cChoice = compChoice(1, 3);
   switch (cChoice) {
     case 1:
-      comp = "Head";
+      compAnswer = "Head";
       break;
     case 2:
-      comp = "Tail";
+      compAnswer = "Tail";
       break;
   }
-  document.getElementById("compChoice").innerHTML = comp;
+  document.getElementById("compChoice").innerHTML = compAnswer;
   // Correct Answer
   theAnswer();
-  let ans = theAnswer(3, 5);
+  let ans = theAnswer(5, 7);
   switch (ans) {
-    case 3:
-      answer = "Head";
-      break;
     case 5:
-      answer = "Tail";
+      correctAnswer = "Head";
+      break;
+    case 6:
+      correctAnswer = "Tail";
       break;
   }
-  document.getElementById("answer").innerHTML = answer;
+  document.getElementById("answer").innerHTML = correctAnswer;
 
-  return useranswer, compChoice, theAnswer;
+  console.log(useranswer, compAnswer, correctAnswer);
+  return useranswer, compAnswer, correctAnswer;
 }
 
 function coinToss() {
+  // guess
   guess();
+  //   //   calcCount
+  //   calcCount();
   //   calculate winner
   findWinner();
 }

@@ -51,7 +51,6 @@ function getCorrectAnswer() {
   }
 }
 
-console.log(userAnswer, compAnswer, correctAnswer);
 function evaluateScore() {
   if (userAnswer.innerHTML === correctAnswer.innerHTML) {
     userCount++;

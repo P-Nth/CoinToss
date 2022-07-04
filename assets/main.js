@@ -1,104 +1,109 @@
-document.getElementById("head").addEventListener("click", (e) => {
-  document.getElementById("userChoice").innerHTML =
-    document.getElementById("head").innerHTML;
+let userCount = 0;
+let compCount = 0;
+let gameCount = 0;
+let headBtn = document.querySelector("#head_button");
+let orStatement = document.querySelector("#or");
+let tailBtn = document.querySelector("#tail_button");
+let resetBtn = document.querySelector("#reset_button");
+let userAnswer = document.querySelector("#user_answer");
+let compAnswer = document.querySelector("#comp_answer");
+let correctAnswer = document.querySelector("#correct_answer");
+let userScore = document.querySelector("#user_count");
+let compScore = document.querySelector("#comp_count");
+let winner = document.querySelector("#winner_display");
+const wrapper = document.querySelector(".game_wrapper");
+const alligner = document.querySelector(".row-2");
+const uview = document.querySelector("#user_game_view");
+const cview = document.querySelector("#comp_game_view");
+const aview = document.querySelector("#answer_game_view");
+
+headBtn.addEventListener("click", () => {
+  userAnswer.innerHTML = `Head`;
+  getCompChoice();
+  getCorrectAnswer();
+  evaluateScore();
 });
-document.getElementById("tail").addEventListener("click", (e) => {
-  document.getElementById("userChoice").innerHTML =
-    document.getElementById("tail").innerHTML;
+tailBtn.addEventListener("click", () => {
+  userAnswer.innerHTML = `Tail`;
+  getCompChoice();
+  getCorrectAnswer();
+  evaluateScore();
 });
-let useranswer = document.getElementById("userChoice").innerHTML;
-function compChoice(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
+resetBtn.addEventListener("click", () => {
+  resetgame();
+});
+
+function getCompChoice() {
+  let compChoice = Math.floor(Math.random() * 2);
+  if (compChoice === 1) {
+    compAnswer.innerHTML = `Head`;
+  } else {
+    compAnswer.innerHTML = `Tail`;
+  }
 }
 
-function theAnswer(head, tail) {
-  return Math.floor(Math.random() * (tail - head)) + head;
+function getCorrectAnswer() {
+  let correctChoice = Math.floor(Math.random() * 2);
+  if (correctChoice === 1) {
+    correctAnswer.innerHTML = `Head`;
+  } else {
+    correctAnswer.innerHTML = `Tail`;
+  }
 }
 
-function findWinner() {
-  let userCount = 0;
-  let compCount = 0;
-  if (useranswer === correctAnswer) {
+console.log(userAnswer, compAnswer, correctAnswer);
+function evaluateScore() {
+  if (userAnswer.innerHTML === correctAnswer.innerHTML) {
     userCount++;
-  }
-  if (compAnswer === correctAnswer) {
-    compCount++;
-  }
-  if (useranswer === compAnswer) {
-    if (useranswer !== correctAnswer) {
-      userCount = 0;
-      compCount = 0;
+    if (userAnswer.innerHTML === compAnswer.innerHTML) {
+      compCount++;
+    } else {
+      compCount += 0;
+    }
+  } else {
+    userCount += 0;
+    if (userAnswer.innerHTML === compAnswer.innerHTML) {
+      compCount += 0;
+    } else {
+      compCount++;
     }
   }
-  if (userCount > compCount) {
-    document.getElementById("winner").innerHTML = "You Win!";
-  }
-  if (userCount < compCount) {
-    document.getElementById("winner").innerHTML = "You Loose!";
-  }
-  if (userCount === compCount) {
-    document.getElementById("winner").innerHTML = "Its A Tie!";
-  }
-  return userCount, compCount;
+  gameCount++;
+  evaluateWinner(userCount, compCount, gameCount);
 }
 
-// function calcCount(useranswer, compAnswer, correctAnswer) {
-//   let userCount = 0;
-//   let compCount = 0;
-//   if (useranswer === correctAnswer) {
-//     userCount++;
-//   }
-//   if (compAnswer === correctAnswer) {
-//     compCount++;
-//   }
-//   if (useranswer === compAnswer) {
-//     if (useranswer !== correctAnswer) {
-//       userCount = 0;
-//       compCount = 0;
-//     }
-//   }
-//   //   console.log(userCount, compCount);
-//   return userCount, compCount;
-// }
-
-function guess() {
-  // user choice
-  useranswer = document.getElementById("userChoice").innerHTML;
-  // Computer Choice
-  compChoice();
-  let cChoice = compChoice(1, 3);
-  switch (cChoice) {
-    case 1:
-      compAnswer = "Head";
-      break;
-    case 2:
-      compAnswer = "Tail";
-      break;
+function evaluateWinner(userCount, compCount, gameCount) {
+  userScore.innerHTML = `${userCount}`;
+  compScore.innerHTML = `${compCount}`;
+  if (gameCount === 5) {
+    if (userCount > compCount) {
+      winner.innerHTML = `<p class="youwin">You won against the computer!</p>`;
+    } else if (userCount === compCount) {
+      winner.innerHTML = `<p class="youtie">Its a tie!</p>`;
+    } else {
+      winner.innerHTML = `<p class="youloose">You lost to the computer</p>`;
+    }
+    headBtn.style.display = "none";
+    orStatement.style.display = "none";
+    tailBtn.style.display = "none";
+    wrapper.style.height = "20em";
+    alligner.style.margin = " 0";
   }
-  document.getElementById("compChoice").innerHTML = compAnswer;
-  // Correct Answer
-  theAnswer();
-  let ans = theAnswer(5, 7);
-  switch (ans) {
-    case 5:
-      correctAnswer = "Head";
-      break;
-    case 6:
-      correctAnswer = "Tail";
-      break;
-  }
-  document.getElementById("answer").innerHTML = correctAnswer;
-
-  console.log(useranswer, compAnswer, correctAnswer);
-  return useranswer, compAnswer, correctAnswer;
 }
 
-function coinToss() {
-  // guess
-  guess();
-  //   //   calcCount
-  //   calcCount();
-  //   calculate winner
-  findWinner();
+function resetgame() {
+  userCount = 0;
+  compCount = 0;
+  gameCount = 0;
+  headBtn.style.display = "block";
+  orStatement.style.display = "block";
+  tailBtn.style.display = "block";
+  userAnswer.innerHTML = "";
+  compAnswer.innerHTML = "";
+  correctAnswer.innerHTML = "";
+  userScore.innerHTML = "0";
+  compScore.innerHTML = "0";
+  winner.innerHTML = "";
+  wrapper.style.height = "";
+  alligner.style.margin = "10em 0 0 0";
 }
-// alert("Hello World!");

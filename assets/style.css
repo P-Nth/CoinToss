@@ -181,7 +181,7 @@ header .nav img:hover {
 }
 .game_wrapper #id {
   text-align: end;
-  color: rgb(127, 197, 255);
+  color: rgb(44, 47, 49);
   font-family: "Roboto", sans-serif;
   font-size: 12px;
   padding: 2em 0;
@@ -225,7 +225,7 @@ header .nav img:hover {
     padding: 2em;
   }
   .game_wrapper .row-2 {
-    margin-top: 10em;
+    margin-top: 8em;
   }
   .game_wrapper .row-2 button {
     width: 10em;

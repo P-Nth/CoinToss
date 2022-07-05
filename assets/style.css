@@ -80,23 +80,13 @@ header .nav img:hover {
   box-shadow: 0 2px 10px rgba(151, 151, 151, 0.795);
   transform: scale(1.03);
   transition: all 0.2s ease-in-out;
+  border-left: 12px solid rgb(1, 255, 48);
 }
-.game_wrapper .youwin::before,
-.game_wrapper .youloose::before,
-.game_wrapper .youtie::before {
-  content: "";
-  display: block;
-  position: absolute;
-  background-color: rgb(1, 255, 48);
-  width: 0.8em;
-  height: 3.17em;
-  margin: -1em -2em;
+.game_wrapper .youloose {
+  border-left: 12px solid rgb(255, 68, 0);
 }
-.game_wrapper .youloose::before {
-  background-color: rgb(255, 68, 0);
-}
-.game_wrapper .youtie::before {
-  background-color: rgb(0, 52, 125);
+.game_wrapper .youtie {
+  border-left: 12px solid rgb(0, 52, 125);
 }
 .game_wrapper .row-1 {
   display: flex;

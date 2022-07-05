@@ -85,7 +85,7 @@ function evaluateWinner(userCount, compCount, gameCount) {
     headBtn.style.display = "none";
     orStatement.style.display = "none";
     tailBtn.style.display = "none";
-    wrapper.style.height = "20em";
+    wrapper.style.height = "26em";
     alligner.style.margin = " 0";
   }
 }

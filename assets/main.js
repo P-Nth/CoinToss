@@ -104,5 +104,5 @@ function resetgame() {
   compScore.innerHTML = "0";
   winner.innerHTML = "";
   wrapper.style.height = "";
-  alligner.style.margin = "8em 0 0 0";
+  alligner.style.margin = "10em 0 0 0";
 }
